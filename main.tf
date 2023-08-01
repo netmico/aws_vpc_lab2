@@ -25,6 +25,15 @@ resource "aws_subnet" "NYDC_Subnet" {
   vpc_id     = aws_vpc.NYDC_VPC.id
 }
 
-resource "" "name" {
-
+resource "aws_internet_gateway" "nydc_igw" {
+  vpc_id = aws_vpc.NYDC_VPC.id
 }
+resource "aws_route_table" "aws_rt" {
+  vpc_id = aws_vpc.NYDC_VPC.id
+}
+resource "aws_route" "default_rt" {
+  route_table_id         = aws_route_table.aws_rt.id
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id             = aws_internet_gateway.nydc_igw.id
+}
+
