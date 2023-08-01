@@ -13,11 +13,5 @@ variable "vpc_cidr" {
   default     = "10.92.0.0/16"
 }
 
-variable "subnet_cidrs" {
-  type    = list(string)
-  default = ["10.92.1.0/24", "10.92.2.0/24", "10.92.3.0/24"]
-}
-
-
 
 
