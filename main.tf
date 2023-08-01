@@ -37,3 +37,7 @@ resource "aws_route" "default_rt" {
   gateway_id             = aws_internet_gateway.nydc_igw.id
 }
 
+resource "a" "name" {
+
+}
+
