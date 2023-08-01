@@ -24,3 +24,7 @@ resource "aws_subnet" "NYDC_Subnet" {
   cidr_block = var.subnet_cidrs[count.index]
   vpc_id     = aws_vpc.NYDC_VPC.id
 }
+
+resource "" "name" {
+
+}
