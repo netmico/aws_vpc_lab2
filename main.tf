@@ -22,6 +22,7 @@ terraform {
 
 resource "aws_vpc" "NYDC_VPC" {
   cidr_block = var.vpc_cidr
+  enable_dns_hostnames = true
 
   tags = {
     Name = var.NYDC_VPC
@@ -43,6 +44,7 @@ resource "aws_route" "default_rt" {
   route_table_id         = aws_route_table.aws_rt.id
   destination_cidr_block = "0.0.0.0/0"
   gateway_id             = aws_internet_gateway.nydc_igw.id
+  
 }
 
 resource "aws_route_table_association" "nydc_assoc" {
@@ -52,6 +54,7 @@ resource "aws_route_table_association" "nydc_assoc" {
 }
 
 resource "aws_security_group" "aws_sec" {
+  vpc_id = aws_vpc.NYDC_VPC.id
   name = "nydc_sec_grp"
   description = "allow_ssh_inbound"
   ingress {
