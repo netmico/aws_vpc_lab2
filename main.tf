@@ -51,3 +51,23 @@ resource "aws_route_table_association" "nydc_assoc" {
 
 }
 
+resource "aws_security_group" "aws_sec" {
+  name = "nydc_sec_grp"
+  description = "allow_ssh_inbound"
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["101.188.67.134/32"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
+
+
