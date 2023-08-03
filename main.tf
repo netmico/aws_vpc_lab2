@@ -21,16 +21,20 @@ terraform {
 }
 
 resource "aws_vpc" "NYDC_VPC" {
-  cidr_block = var.vpc_cidr
+  cidr_block = "10.92.0.0/16"
+  enable_dns_hostname = true
+  enable_dns_support = true
 
   tags = {
-    Name = var.NYDC_VPC
+    Name = "DEV_VPC"
   }
 }
 
 resource "aws_subnet" "NYDC_Subnet" {
   cidr_block = "10.92.1.0/24"
-  vpc_id     = aws_vpc.NYDC_VPC.id
+   vpc_id     = aws_vpc.NYDC_VPC.id
+  map_public_ip_on_lunch = true
+  availability_zone = "us-east-1"
 }
 
 
