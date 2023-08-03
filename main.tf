@@ -33,12 +33,15 @@ resource "aws_subnet" "NYDC_Subnet" {
   vpc_id     = aws_vpc.NYDC_VPC.id
 }
 
-resource "aws_internet_gateway" "nydc_igw" {
-  vpc_id = aws_vpc.NYDC_VPC.id
-}
+
 resource "aws_route_table" "aws_rt" {
   vpc_id = aws_vpc.NYDC_VPC.id
 }
+
+resource "aws_internet_gateway" "nydc_igw" {
+  vpc_id = aws_vpc.NYDC_VPC.id
+}
+
 resource "aws_route" "default_rt" {
   route_table_id         = aws_route_table.aws_rt.id
   destination_cidr_block = "0.0.0.0/0"
@@ -69,6 +72,23 @@ resource "aws_security_group" "aws_sec" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
+
+
+resource "aws_network_interface" "nydc_int" {
+  subnet_id   = aws_sub.NYDC_Subnet.id
+  private_ips = "10.92.1.0/24"
+}
+
+
+resource "aws_eip" "aws_IP" {
+  aws_network_interface = aws_network_interface.nydc_int.id
+}
+resource "aws_eip_association" "eip_assoc" {
+  allocation_id = aws_eip.aws_IP.id
+}
+
+
+
 
 
 
