@@ -52,6 +52,7 @@ resource "aws_route_table_association" "nydc_assoc" {
 }
 
 resource "aws_security_group" "aws_sec" {
+  vpc_id = aws_vpc.NYDC_VPC.id
   name = "nydc_sec_grp"
   description = "allow_ssh_inbound"
   ingress {
