@@ -74,11 +74,6 @@ resource "aws_security_group" "aws_sec" {
 }
 
 
-resource "aws_network_interface" "nydc_int" {
-  subnet_id   = aws_sub.NYDC_Subnet.id
-  private_ips = "10.92.1.0/24"
-}
-
 
 resource "aws_eip" "aws_IP" {
   aws_network_interface = aws_network_interface.nydc_int.id
