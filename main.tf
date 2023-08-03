@@ -76,11 +76,9 @@ resource "aws_security_group" "aws_sec" {
 
 
 resource "aws_eip" "aws_IP" {
-  aws_network_interface = aws_network_interface.nydc_int.id
+  vpc = true
 }
-resource "aws_eip_association" "eip_assoc" {
-  allocation_id = aws_eip.aws_IP.id
-}
+
 
 
 
